@@ -24,7 +24,7 @@ def load_portfolio_data(file):
     for _, row in df.iterrows():
         stock = yf.Ticker(row["Ticker"])
 
-        # Aktuellen Kurs laden
+        # Load current price
         try:
             history = stock.history(start=row["Buy Date"], end=today)
             history.index = history.index.tz_localize(None)
@@ -33,7 +33,7 @@ def load_portfolio_data(file):
             price = None
         current_prices.append(price)
 
-        # Dividenden berechnen
+        # Calculating dividends
         divs = stock.dividends
         if not divs.empty:
             divs.index = divs.index.tz_localize(None)
@@ -43,9 +43,9 @@ def load_portfolio_data(file):
             total_divs = 0.0
         dividends_received.append(total_divs)
 
-    # Spalten im DataFrame berechnen
+    # Compute columns in the DataFrame
     df["Current Price"] = current_prices
-    df["Current"] = df["Current Price"]  # Alias für andere Module
+    df["Current"] = df["Current Price"]  
     df["Value"] = df["Current"] * df["Shares"]
     df["Profit/Loss"] = (df["Current"] - df["Buy Price"]) * df["Shares"]
     df["Dividends"] = dividends_received
