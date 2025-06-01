@@ -97,7 +97,7 @@ def show_performance():
     ax.legend()
     st.pyplot(fig)
 
-    # --- Dividenden Chart ---
+    # --- Dividends Chart ---
     st.subheader("Received Dividends")
     dividend_df = pd.DataFrame({
         ticker: divs * df.loc[df["Ticker"] == ticker, "Shares"].iloc[0]
@@ -112,7 +112,7 @@ def show_performance():
     else:
         st.info("No dividend data available.")
 
-    # --- Korrelation ---
+    # --- Correlation ---
     st.subheader("Return Correlation Matrix")
     returns_matrix = pd.DataFrame(returns_data).fillna(0)
     corr = returns_matrix.corr()
