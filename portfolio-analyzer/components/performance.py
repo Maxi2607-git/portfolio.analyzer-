@@ -52,7 +52,7 @@ def show_performance():
 
     portfolio_returns = pd.concat(returns_data.values(), axis=1).mean(axis=1).dropna()
 
-    # --- Metriken berechnen ---
+    # --- Computing metrics ---
     sharpe = portfolio_returns.mean() / portfolio_returns.std() * np.sqrt(252)
     downside_std = portfolio_returns[portfolio_returns < 0].std() * np.sqrt(252)
     sortino = portfolio_returns.mean() / downside_std if downside_std > 0 else 0
@@ -69,7 +69,7 @@ def show_performance():
             income_total += divs.sum() * shares
     income_yield = income_total / total_value.sum() if total_value.sum() > 0 else 0
 
-    # --- Darstellung ---
+    # --- Visualization ---
     st.subheader("Portfolio Summary")
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Total Return (%)", f"{(1 + portfolio_returns).prod() - 1:.2%}")
