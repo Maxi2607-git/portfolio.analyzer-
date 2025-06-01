@@ -30,6 +30,6 @@ Your uploaded CSV should contain the following columns:
 ## Run the App
 
 ```bash
-streamlit run app.py
+python -m streamlit run app.py
 ```
 
